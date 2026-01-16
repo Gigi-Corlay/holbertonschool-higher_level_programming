@@ -7,7 +7,7 @@
 - Command line arguments
 - Pycodestyle – Style Guide for Python Code
 
-** man or help:**
+**man or help:**
 - python3**
 
 
