@@ -1,9 +1,4 @@
 #!/usr/bin/python3
-"""
-Print the alphabet in reverse order, 
-alternating lowercase and uppercase letters, 
-without a newline
-"""
 for i in range(26):
     if i % 2 == 0:
         lowercase = chr(122 - i)
