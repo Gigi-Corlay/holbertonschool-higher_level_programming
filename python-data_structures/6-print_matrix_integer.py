@@ -1,11 +1,8 @@
 #!/usr/bin/python3
 def print_matrix_integer(matrix=[[]]):
-    if matrix == [[]]:
+    for row in matrix:
+        for i, nbr in enumerate(row):
+            if i != 0:
+                print(" ", end="")
+            print("{:d}".format(nbr), end="")
         print()
-        return
-    for i in matrix:
-        for j in range(len(i)):
-            if j != len(i) - 1:
-                print("{}".format(i[j]), end=" ")
-            else:
-                print("{}".format(i[j]))
