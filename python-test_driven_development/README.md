@@ -1,7 +1,5 @@
 # Python - Test-driven development
 
-![Project Badge](https://img.shields.io/badge/Progress-0%25-red)
-
 ## 📌 Description du projet
 
 Ce projet a pour objectif d'apprendre et de pratiquer le **Test-Driven Development (TDD)** en Python. Le principe fondamental du TDD est d'écrire les **tests avant le code**, afin de définir clairement le comportement attendu des fonctions et de garantir leur fiabilité.
