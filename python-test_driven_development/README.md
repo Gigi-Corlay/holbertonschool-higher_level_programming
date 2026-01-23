@@ -70,10 +70,3 @@ Pour lancer les tests :
 ```bash
 python3 -m doctest -v tests/*.txt
 ```
-
----
-
-## 📈 Progression
-
-* **Statut du projet :** En cours
-* **Progression :** 0%
