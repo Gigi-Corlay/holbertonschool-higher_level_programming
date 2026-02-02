@@ -1,0 +1,12 @@
+{
+    "sqltools.connections": [
+        {
+            "previewLimit": 50,
+            "driver": "CloudSQL-PostgreSQL",
+            "name": "Georgia Boulnois",
+            "username": "Gigi_Corlay",
+            "instanceConnectionName": "Georgia",
+            "database": "Exo"
+        }
+    ]
+}
