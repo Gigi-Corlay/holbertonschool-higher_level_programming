@@ -1,0 +1,40 @@
+#!/usr/bin/python3
+"""
+Test for MyList class and print_sorted method.
+"""
+
+>>> MyList = __import__('1-my_list').MyList
+>>> my_list = MyList()
+>>> my_list.append(1)
+>>> my_list.append(4)
+>>> my_list.append(2)
+>>> my_list.append(3)
+>>> my_list.append(5)
+>>> print(my_list)
+[1, 4, 2, 3, 5]
+>>> my_list.print_sorted()
+[1, 2, 3, 4, 5]
+>>> print(my_list)
+[1, 4, 2, 3, 5]
+
+# Test with an empty list
+>>> empty = MyList()
+>>> print(empty)
+[]
+>>> empty.print_sorted()
+[]
+>>> print(empty)
+[]
+
+# Test with negative numbers
+>>> numbers = MyList()
+>>> numbers.append(-2)
+>>> numbers.append(0)
+>>> numbers.append(5)
+>>> numbers.append(-1)
+>>> print(numbers)
+[-2, 0, 5, -1]
+>>> numbers.print_sorted()
+[-2, -1, 0, 5]
+>>> print(numbers)
+[-2, 0, 5, -1]
