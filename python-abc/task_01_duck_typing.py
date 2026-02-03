@@ -18,6 +18,7 @@ class Shape(ABC):
         """
         pass
 
+    @abstractmethod
     def perimeter(self):
         """
         Optional method for perimeter.
