@@ -3,12 +3,12 @@
 import math
 from abc import ABC, abstractmethod
 
+
 class Shape(ABC):
     """
     Abstract base class for all shapes.
     Forces subclasses to implement the 'area' method.
     """
-
 
     @abstractmethod
     def area(self):
