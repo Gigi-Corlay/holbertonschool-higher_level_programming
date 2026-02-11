@@ -10,13 +10,6 @@ and prints its content to stdout.
 def read_file(filename=""):
     """
     Reads a text file (UTF-8) and prints its content.
-
-    Args:
-        filename (str): The name of the file to read (default is an empty string).
     """
-    try:
-        with open(filename, "r", encoding="utf-8") as f:
-            content = f.read()
-        print(content, end="")
-    except FileNotFoundError:
-        print(f"Error: File '{filename}' not found.")
+    with open(filename, "r", encoding="utf-8") as f:
+        print(f.read(), end="")
