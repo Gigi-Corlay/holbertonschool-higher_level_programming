@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 """
-Function that returns Pascal's triangle of size n
+Module that provides a function to generate Pascal's triangle.
 """
 
 def pascal_triangle(n):
