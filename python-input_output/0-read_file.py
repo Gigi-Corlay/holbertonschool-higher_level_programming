@@ -13,10 +13,10 @@ def read_file(filename=""):
 
     Args:
         filename (str): The name of the file to read (default is an empty string).
-
-    Returns:
-        None
     """
-    with open(filename, "r", encoding="utf-8") as f:
-        content = f.read()
-    print(content, end="")
+    try:
+        with open(filename, "r", encoding="utf-8") as f:
+            content = f.read()
+        print(content, end="")
+    except FileNotFoundError:
+        print(f"Error: File '{filename}' not found.")
