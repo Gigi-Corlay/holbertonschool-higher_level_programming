@@ -1,0 +1,135 @@
+# Introduction to RESTful APIs
+
+## Introduction
+
+In the evolving world of software development, understanding how to communicate and transfer data efficiently between systems is essential.
+
+This project explores the domain of RESTful APIs, a cornerstone of modern web services.
+
+The Representational State Transfer (REST) architecture is a set of constraints designed to build systems that are:
+
+- Scalable
+- Stateless
+- Cacheable
+- Client-Server oriented
+
+This architectural approach enables seamless integration between different services and applications across the web.
+
+---
+
+## Learning Objectives
+
+By completing this project, you will understand:
+
+### 1. HTTP/HTTPS Basics
+
+- Core principles of the HTTP protocol
+- Request and response structure
+- Common HTTP methods (GET, POST, PUT, DELETE)
+- Difference between HTTP and HTTPS (security via encryption)
+
+### 2. API Consumption with Command Line
+
+- Interact with APIs using tools like curl
+- Send requests and inspect responses
+- Understand headers and status codes
+
+### 3. API Consumption with Python
+
+- Fetch data using Python
+- Process and manipulate JSON responses
+- Automate API interactions
+
+### 4. API Development with http.server
+
+- Build a basic API using Python’s built-in http.server
+- Handle routes manually
+- Return structured JSON responses
+
+### 5. API Development with Flask
+
+- Develop APIs using Flask
+- Implement routing
+- Manage request data
+- Structure scalable applications
+
+### 6. API Security and Authentication
+
+- Protect endpoints
+- Understand authentication mechanisms:
+  - API Keys
+  - Token-based authentication
+  - JWT
+- Secure data transfer with HTTPS
+
+### 7. API Standards and Documentation with OpenAPI
+
+- Understand API documentation standards
+- Use the OpenAPI Specification
+- Maintain readable and standardized API documentation
+- Improve usability and maintainability
+
+---
+
+## Importance of RESTful APIs
+
+In today’s interconnected digital world, RESTful APIs are everywhere.
+
+They act as intermediaries between systems:
+
+- Social media platforms sharing data
+- Payment systems processing transactions
+- Industrial automation systems communicating
+- Mobile apps interacting with cloud servers
+
+APIs translate requests into actions:
+
+- Fetching data
+- Updating records
+- Triggering processes
+- Managing authentication
+
+Mastering REST APIs means mastering modern system communication.
+
+---
+
+## REST API Conceptual Diagram
+
+```
++-------+           +-----------+           +-----------+           +-----------+
+|       |  Request  |           |  Process  |           |  Fetch /  |           |
+|       |  -------> |           |  -------> |           |  Modify   |           |
+|       |           |           |           |           |  -------> |           |
+|       | <-------  |           | <-------  |           |           |           |
+|       | Response  |           |  Return   |           |           |           |
++-------+           +-----------+           +-----------+           +-----------+
+  Client              Web Server              API Server               Database
+```
+
+---
+
+## Components Explained
+
+### Client
+
+The requester of the service.
+
+- Web browser
+- Mobile application
+- Another backend system
+
+### Web Server
+
+- Receives HTTP/HTTPS requests
+- Performs routing
+- Handles load balancing
+- Forwards requests to the API server
+
+### API Server
+
+- Core business logic
+- Processes requests
+- Interacts with the database
+- Returns structured responses (usually JSON)
+
+### Database
