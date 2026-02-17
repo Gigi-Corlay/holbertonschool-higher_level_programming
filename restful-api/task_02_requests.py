@@ -31,7 +31,8 @@ def fetch_and_print_posts():
 
 
 def fetch_and_save_posts():
-    """Fetch all posts from JSONPlaceholder and save them to a CSV file.
+    """
+    Fetch all posts from JSONPlaceholder and save them to a CSV file.
 
     Sends a GET request to the API and checks the status code.
     If the request is successful (200), converts the response to JSON,
