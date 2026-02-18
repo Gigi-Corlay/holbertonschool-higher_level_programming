@@ -17,14 +17,8 @@ def home():
     """
     return "Welcome to the Flask API!"
 
-users = {}
 
-users["jane"] = {
-    "username": "jane",
-    "name": "Jane",
-    "age": 28,
-    "city": "Los Angeles"
-}
+users = {}
 
 
 @app.route("/data")
@@ -83,9 +77,8 @@ def add_user():
         return jsonify({"error": "Username already exists"}), 409
 
     users[username] = data
-
     return jsonify({"message": "User added", "user": users[username]}), 201
 
 
 if __name__ == "__main__":
-    app.run()
+    app.run(port=5001)
