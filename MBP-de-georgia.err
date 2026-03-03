@@ -1,0 +1,10 @@
+2026-03-02T20:22:48.104380Z 0 [System] [MY-013169] [Server] /usr/local/mysql/bin/mysqld (mysqld 8.0.24) initializing of server in progress as process 97644
+2026-03-02T20:22:48.112272Z 0 [ERROR] [MY-010457] [Server] --initialize specified but the data directory has files in it. Aborting.
+2026-03-02T20:22:48.113928Z 0 [ERROR] [MY-013236] [Server] The designated data directory /usr/local/mysql/data/ is unusable. You can remove all files that the server added to it.
+2026-03-02T20:22:48.114485Z 0 [ERROR] [MY-010119] [Server] Aborting
+2026-03-02T20:22:48.115063Z 0 [System] [MY-010910] [Server] /usr/local/mysql/bin/mysqld: Shutdown complete (mysqld 8.0.24)  MySQL Community Server - GPL.
+2026-03-02T20:24:39.530238Z 0 [System] [MY-013169] [Server] /usr/local/mysql/bin/mysqld (mysqld 8.0.24) initializing of server in progress as process 98424
+2026-03-02T20:24:39.534069Z 0 [ERROR] [MY-010457] [Server] --initialize specified but the data directory has files in it. Aborting.
+2026-03-02T20:24:39.534277Z 0 [ERROR] [MY-013236] [Server] The designated data directory /usr/local/mysql/data/ is unusable. You can remove all files that the server added to it.
+2026-03-02T20:24:39.534540Z 0 [ERROR] [MY-010119] [Server] Aborting
+2026-03-02T20:24:39.534943Z 0 [System] [MY-010910] [Server] /usr/local/mysql/bin/mysqld: Shutdown complete (mysqld 8.0.24)  MySQL Community Server - GPL.
