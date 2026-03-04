@@ -1,0 +1,105 @@
+# 📚 SQL Concepts – General Overview
+
+This guide summarizes key SQL concepts and best practices for working with MySQL databases.  
+It covers user management, constraints, relationships, and common queries.
+
+---
+
+## 🛠️ How to Create a New MySQL User
+
+To create a new user in MySQL:
+
+```sql
+CREATE USER 'username'@'localhost' IDENTIFIED BY 'password';
+```
+
+## 🔑 How to Manage Privileges for a User
+
+Grant privileges to a user for a **specific database**:
+
+```sql
+GRANT ALL PRIVILEGES ON database_name.* TO 'username'@'localhost';
+FLUSH PRIVILEGES;
+```
+
+## 🏷️ What's a PRIMARY KEY
+
+A PRIMARY KEY is a column (or set of columns) that uniquely identifies each row in a table.
+
+Example:
+```sql
+CREATE TABLE students (
+    id INT PRIMARY KEY,
+    name VARCHAR(255)
+);```
+
+- Ensures **uniqueness**.
+- Automatically NOT NULL.
+
+## 🔗 What's a FOREIGN KEY
+
+A **FOREIGN KEY** is a column that creates a link between two tables.
+
+Example:
+```sql
+CREATE TABLE orders (
+    order_id INT PRIMARY KEY,
+    student_id INT,
+    FOREIGN KEY (student_id) REFERENCES students(id)
+);
+```
+- Enforces **referential integrity**.
+- Prevents insertion of invalid references.
+
+## 🚫 How to Use NOT NULL and UNIQUE Constraints
+
+**NOT NULL:** ensures a column cannot contain NULL values.
+
+**UNIQUE:** ensures all values in the column are distinct.
+```sql
+Example:
+
+CREATE TABLE users (
+    id INT PRIMARY KEY,
+    email VARCHAR(255) NOT NULL UNIQUE
+);```
+
+## 📊 How to Retrieve Data from Multiple Tables in One Request
+```Using JOIN```
+```sql
+SELECT students.name, orders.order_id
+FROM students
+INNER JOIN orders ON students.id = orders.student_id;
+```
+- **INNER JOIN** returns rows that have matching values in both tables.
+
+```Using UNION```
+```sql
+SELECT name FROM students
+UNION
+SELECT name FROM teachers;
+```
+- Combines results from multiple queries.
+- Removes duplicate rows.
+
+## 🔍 What Are Subqueries
+
+A **subquery** is a query inside another query.
+
+Example:
+```sql
+SELECT name
+FROM students
+WHERE id IN (SELECT student_id FROM orders WHERE order_id > 10);
+```
+- Can be used in ```SELECT```, ```WHERE```, or ```FROM```.
+- Allows filtering based on the result of another query.
+
+## 🤝 Summary of JOIN Types
+
+| JOIN Type       | Description |
+|-----------------|-------------|
+| INNER JOIN      | Returns rows with matching values in both tables |
+| LEFT JOIN       | Returns all rows from the left table and matched rows from the right table |
+| RIGHT JOIN      | Returns all rows from the right table and matched rows from the left table |
+| FULL OUTER JOIN | Returns all rows when there is a match in one of the tables |
