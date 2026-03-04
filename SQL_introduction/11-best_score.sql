@@ -1,3 +1,4 @@
+-- Selects score and name from second_table with score >= 10 ordered by descending score
 SELECT score, name
 FROM second_table
 WHERE score >= 10
