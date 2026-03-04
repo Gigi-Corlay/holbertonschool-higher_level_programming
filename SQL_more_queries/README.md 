@@ -1,4 +1,24 @@
-# 📚 SQL Concepts – General Overview
+# 📚 Projet SQL
+## 📌 Description
+
+Ce projet contient des scripts SQL permettant de manipuler et interroger une base de données relationnelle.
+
+**Il couvre les concepts fondamentaux tels que :**
+- Création de bases de données
+- Création de tables
+- Requêtes SELECT
+- JOIN
+- Fonctions d’agrégation
+- Sous-requêtes
+- Contraintes (PRIMARY KEY, FOREIGN KEY, etc.)
+---
+
+## 🛠️ Technologies utilisées
+- SQL
+- MySQL / PostgreSQL (à adapter)
+- Terminal Linux
+
+## 📚 SQL Concepts – General Overview
 
 This guide summarizes key SQL concepts and best practices for working with MySQL databases.  
 It covers user management, constraints, relationships, and common queries.
@@ -12,7 +32,7 @@ To create a new user in MySQL:
 ```sql
 CREATE USER 'username'@'localhost' IDENTIFIED BY 'password';
 ```
-
+---
 ## 🔑 How to Manage Privileges for a User
 
 Grant privileges to a user for a **specific database**:
@@ -21,7 +41,7 @@ Grant privileges to a user for a **specific database**:
 GRANT ALL PRIVILEGES ON database_name.* TO 'username'@'localhost';
 FLUSH PRIVILEGES;
 ```
-
+---
 ## 🏷️ What's a PRIMARY KEY
 
 A PRIMARY KEY is a column (or set of columns) that uniquely identifies each row in a table.
@@ -50,7 +70,7 @@ CREATE TABLE orders (
 ```
 - Enforces **referential integrity**.
 - Prevents insertion of invalid references.
-
+---
 ## 🚫 How to Use NOT NULL and UNIQUE Constraints
 
 **NOT NULL:** ensures a column cannot contain NULL values.
@@ -63,7 +83,7 @@ CREATE TABLE users (
     id INT PRIMARY KEY,
     email VARCHAR(255) NOT NULL UNIQUE
 );```
-
+---
 ## 📊 How to Retrieve Data from Multiple Tables in One Request
 ```Using JOIN```
 ```sql
@@ -81,7 +101,7 @@ SELECT name FROM teachers;
 ```
 - Combines results from multiple queries.
 - Removes duplicate rows.
-
+---
 ## 🔍 What Are Subqueries
 
 A **subquery** is a query inside another query.
