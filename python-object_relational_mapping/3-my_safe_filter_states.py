@@ -1,8 +1,8 @@
 #!/usr/bin/python3
 """
-Affiche tous les enregistrements de la table states
-dont le nom correspond à l'argument fourni
-(Sécurisé contre les injections SQL)
+Displays all records in the states table
+where the name matches the given argument
+(Safe from SQL injection)
 """
 
 import sys
@@ -18,7 +18,7 @@ if __name__ == "__main__":
     database = sys.argv[3]
     state_name = sys.argv[4]
 
-    # Connexion à MySQL
+    # Connect to MySQL
     db = MySQLdb.connect(
         host="localhost",
         port=3306,
@@ -29,15 +29,17 @@ if __name__ == "__main__":
 
     cursor = db.cursor()
 
-    # Requête sécurisée avec paramètre
+    # Safe query using parameterized statement
     query = "SELECT * FROM states WHERE name = %s ORDER BY id ASC"
-    cursor.execute(query, (state_name,))  # le paramètre est passé dans un tuple
+    cursor.execute(query, (state_name,))  # the parameter is passed as a tuple
 
+    # Fetch all results
     rows = cursor.fetchall()
 
+    # Print each tuple (id, name)
     for row in rows:
         print(row)
 
+    # Close cursor and connection
     cursor.close()
     db.close()
-    
