@@ -7,12 +7,10 @@ import sys
 import MySQLdb
 
 if __name__ == "__main__":
-    # Récupérer les arguments
     username = sys.argv[1]
     password = sys.argv[2]
     database = sys.argv[3]
 
-    # Connexion à MySQL
     db = MySQLdb.connect(
         host="localhost",
         port=3306,
@@ -22,11 +20,13 @@ if __name__ == "__main__":
     )
 
     cursor = db.cursor()
-    # Filtrer avec LIKE 'N%' et trier par id ASC
-    cursor.execute("SELECT * FROM states WHERE name LIKE 'N%' ORDER BY id ASC;")
+    cursor.execute(
+        "SELECT * FROM states WHERE name LIKE BINARY 'N%' ORDER BY id ASC"
+    )
 
-    # Afficher le résultat exactement comme demandé
-    for row in cursor.fetchall():
+    rows = cursor.fetchall()
+
+    for row in rows:
         print(row)
 
     cursor.close()
