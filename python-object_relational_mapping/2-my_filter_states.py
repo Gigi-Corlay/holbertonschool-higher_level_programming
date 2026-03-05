@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 """
-Displays all values in the states table where name matches the argument
+Displays the first state in the states table where name matches the argument
 """
 
 import sys
@@ -24,15 +24,12 @@ if __name__ == "__main__":
 
     cursor = db.cursor()
 
-    # Execute the query using format to insert the state name
-    query = "SELECT * FROM states WHERE name = '{}' ORDER BY id ASC".format(state_name)
-    cursor.execute(query)
+    # Use parameterized query and fetch only one row
+    query = "SELECT * FROM states WHERE name = %s ORDER BY id ASC LIMIT 1"
+    cursor.execute(query, (state_name,))
 
-    # Fetch all results
-    rows = cursor.fetchall()
-
-    # Print each tuple (id, name)
-    for row in rows:
+    row = cursor.fetchone()  # Fetch only the first matching row
+    if row:
         print(row)
 
     # Close cursor and connection
