@@ -1,21 +1,21 @@
 #!/usr/bin/python3
-
-import pymysql
-import MySQLdb
-import sys
-
-pymysql.install_as_MySQLdb()
-
 """
 Lists all states from the database 'hbtn_0e_0_usa'
 """
+
+import sys
+import pymysql
+
+# Permettre à pymysql de se comporter comme MySQLdb
+pymysql.install_as_MySQLdb()
+import MySQLdb  # Holberton exige MySQLdb
+
 if __name__ == "__main__":
-    # Get MySQL credentials and database name from command-line arguments
     username = sys.argv[1]
     password = sys.argv[2]
     database = sys.argv[3]
 
-    # Connect to MySQL server on localhost:3306
+    # Connexion à MySQL avec MySQLdb (via pymysql)
     db = MySQLdb.connect(
         host="localhost",
         port=3306,
@@ -27,9 +27,7 @@ if __name__ == "__main__":
     cursor = db.cursor()
     cursor.execute("SELECT * FROM states ORDER BY id ASC")
 
-    # Fetch and display all rows
-    rows = cursor.fetchall()
-    for row in rows:
+    for row in cursor.fetchall():
         print(row)
 
     cursor.close()
