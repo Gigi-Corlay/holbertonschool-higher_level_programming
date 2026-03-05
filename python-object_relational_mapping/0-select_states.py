@@ -1,13 +1,13 @@
 #!/usr/bin/python3
 
 import pymysql
-pymysql.install_as_MySQLdb()
 import MySQLdb
-
 import sys
 
+pymysql.install_as_MySQLdb()
+
 """
-Lists all states from the database hbtn_0e_0_usa
+Lists all states from the database 'hbtn_0e_0_usa'
 """
 if __name__ == "__main__":
     # Get MySQL credentials and database name from command-line arguments
