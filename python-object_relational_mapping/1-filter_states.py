@@ -7,12 +7,12 @@ import sys
 import MySQLdb
 
 if __name__ == "__main__":
-    # Récupère les arguments
+    # Get the arguments
     username = sys.argv[1]
     password = sys.argv[2]
     database = sys.argv[3]
 
-    # Connexion à MySQL
+    # Connect to MySQL
     db = MySQLdb.connect(
         host="localhost",
         port=3306,
@@ -23,16 +23,16 @@ if __name__ == "__main__":
 
     cursor = db.cursor()
 
-    # Exécute la requête
+    # Execute the query
     cursor.execute("SELECT * FROM states WHERE name LIKE BINARY 'N%' ORDER BY id ASC")
 
-    # Récupère tous les résultats dans 'rows'
+    # Fetch all results into 'rows'
     rows = cursor.fetchall()
 
-    # Affiche chaque tuple (id, name)
+    # Print each tuple (id, name)
     for row in rows:
         print(row)
 
-    # Ferme le curseur et la connexion
+    # Close the cursor and the connection
     cursor.close()
     db.close()
