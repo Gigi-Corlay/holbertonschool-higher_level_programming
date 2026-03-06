@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 """
 Lists all State objects that contain the letter 'a' from the database hbtn_0e_6_usa
+Results are sorted by states.id in ascending order.
 Usage: ./9-model_state_filter_a.py <mysql username> <mysql password> <database name>
 """
 
@@ -10,6 +11,7 @@ from sqlalchemy.orm import sessionmaker
 from model_state import Base, State
 
 if __name__ == "__main__":
+    # Verify the correct number of arguments
     if len(sys.argv) != 4:
         print("Usage: ./9-model_state_filter_a.py <user> <password> <database>")
         sys.exit(1)
@@ -18,6 +20,7 @@ if __name__ == "__main__":
 
     engine = create_engine(f"mysql+mysqldb://{user}:{password}@localhost/{database}",
                            pool_pre_ping=True)
+
     Session = sessionmaker(bind=engine)
     session = Session()
 
