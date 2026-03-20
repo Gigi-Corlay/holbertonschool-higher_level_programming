@@ -17,7 +17,6 @@ if (args.length < 2) {
     }
   }
 
-  // Si tous les nombres sont égaux, second = max
   if (second === max) {
     console.log(max);
   } else {
