@@ -8,8 +8,8 @@ let output = '';
 
 // Loop through the array
 for (const language of languages) {
-  output += language + '\n'; // Add each line followed by a newline
+  output += language + '\n';
 }
 
 // Print all lines at once using a single console.log
-console.log(output.trim()); // trim() removes the extra newline at the end
+console.log(output.trim()); 
