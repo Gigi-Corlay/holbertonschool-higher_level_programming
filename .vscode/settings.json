@@ -8,5 +8,6 @@
             "instanceConnectionName": "Georgia",
             "database": "Exo"
         }
-    ]
+    ],
+    "liveServer.settings.port": 5501
 }
