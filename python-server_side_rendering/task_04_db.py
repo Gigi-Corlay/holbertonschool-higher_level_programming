@@ -8,18 +8,17 @@ from flask import Flask, render_template, request
 app = Flask(__name__)
 
 """
-Données JSON statiques pour testing
+Static JSON data for testing purposes
 """
 json_products = [
     {"id": 1, "name": "Laptop", "category": "Electronics", "price": 799.99},
     {"id": 2, "name": "Coffee Mug", "category": "Home Goods", "price": 15.99}
 ]
 
-
-# Fonctions de lecture des données
+# --- Data reading functions ---
 def fetch_products_from_csv(filename='products.csv'):
     """
-    Lit les produits depuis un fichier CSV et retourne une liste de dicts
+    Reads products from a CSV file and returns a list of dictionaries
     """
     products = []
     try:
@@ -31,20 +30,20 @@ def fetch_products_from_csv(filename='products.csv'):
                     row['price'] = float(row['price'])
                     products.append(row)
                 except ValueError:
-                    print(f"Erreur conversion CSV: {row}")
+                    print(f"CSV conversion error: {row}")
     except FileNotFoundError:
-        print(f"Fichier CSV {filename} introuvable")
+        print(f"CSV file {filename} not found")
     return products
 
 
 def fetch_products_from_db():
     """
-    Lit les produits depuis SQLite et retourne une liste de dicts
+    Reads products from a SQLite database and returns a list of dictionaries
     """
     products = []
     try:
         conn = sqlite3.connect('products.db')
-        conn.row_factory = sqlite3.Row
+        conn.row_factory = sqlite3.Row  # Access columns by name
         cursor = conn.cursor()
         cursor.execute("SELECT id, name, category, price FROM Products")
         rows = cursor.fetchall()
@@ -57,7 +56,7 @@ def fetch_products_from_db():
     return products
 
 
-# Routes
+# --- Routes ---
 @app.route('/')
 def home():
     return render_template('index.html')
@@ -76,7 +75,7 @@ def contact():
 @app.route('/items')
 def items():
     """
-    Affiche les items depuis items.json
+    Displays items from items.json
     """
     try:
         with open('items.json', 'r') as f:
@@ -90,12 +89,12 @@ def items():
 @app.route('/products')
 def products():
     """
-    Affiche les produits depuis JSON, CSV ou SQL, avec filtrage par id optionnel
+    Displays products from JSON, CSV, or SQL, with optional filtering by ID
     """
     source = request.args.get('source', 'json').lower()
     product_id = request.args.get('id')
 
-    # Lecture des données selon la source
+    # Read data based on the source
     if source == 'json':
         data = json_products
     elif source == 'csv':
@@ -105,7 +104,7 @@ def products():
     else:
         return render_template('product_display.html', error="Wrong source", products=[])
 
-    # Filtrage par ID si fourni
+    # Filter by ID if provided
     if product_id:
         try:
             product_id = int(product_id)
@@ -119,6 +118,6 @@ def products():
     return render_template('product_display.html', products=data)
 
 
-# Exécution de l'application
+# --- Run the application ---
 if __name__ == '__main__':
     app.run(debug=True, port=5000)
