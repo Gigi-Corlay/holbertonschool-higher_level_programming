@@ -103,8 +103,7 @@ def products():
     elif source == 'sql':
         data = fetch_products_from_db()
     else:
-        return render_template('product_display.html',
-                               error="Wrong source", products=[])
+        return render_template('product_display.html', error="Wrong source", products=[])
 
     # Filtrage par ID si fourni
     if product_id:
@@ -112,12 +111,10 @@ def products():
             product_id = int(product_id)
             filtered = [p for p in data if p['id'] == product_id]
             if not filtered:
-                return render_template('product_display.html',
-                                       error="Product not found", products=[])
+                return render_template('product_display.html', error="Product not found", products=[])
             data = filtered
         except ValueError:
-            return render_template('product_display.html',
-                                   error="Invalid ID format", products=[])
+            return render_template('product_display.html', error="Invalid ID format", products=[])
 
     return render_template('product_display.html', products=data)
 
