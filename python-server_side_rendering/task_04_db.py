@@ -15,12 +15,51 @@ json_products = [
     {"id": 2, "name": "Coffee Mug", "category": "Home Goods", "price": 15.99}
 ]
 
-# --- Data reading functions ---
+
+# -----------------------------
+# Database initialization
+# -----------------------------
+def create_database():
+    """
+    Creates the products.db SQLite database and populates it if empty.
+    Called once at application startup.
+    """
+    conn = sqlite3.connect('products.db')
+    cursor = conn.cursor()
+
+    cursor.execute('''
+        CREATE TABLE IF NOT EXISTS Products (
+            id INTEGER PRIMARY KEY,
+            name TEXT NOT NULL,
+            category TEXT NOT NULL,
+            price REAL NOT NULL
+        )
+    ''')
+
+    # Only insert if table is empty
+    cursor.execute("SELECT COUNT(*) FROM Products")
+    if cursor.fetchone()[0] == 0:
+        cursor.execute('''
+            INSERT INTO Products (id, name, category, price)
+            VALUES
+            (1, 'Laptop', 'Electronics', 799.99),
+            (2, 'Coffee Mug', 'Home Goods', 15.99)
+        ''')
+
+    conn.commit()
+    conn.close()
+
+
+# -----------------------------
+# CSV Reader
+# -----------------------------
 def fetch_products_from_csv(filename='products.csv'):
     """
-    Reads products from a CSV file and returns a list of dictionaries
+    Reads products from a CSV file and returns a list of dictionaries.
+    Returns (products, error_message).
     """
     products = []
+
     try:
         with open(filename, 'r') as f:
             reader = csv.DictReader(f)
@@ -29,34 +68,48 @@ def fetch_products_from_csv(filename='products.csv'):
                     row['id'] = int(row['id'])
                     row['price'] = float(row['price'])
                     products.append(row)
-                except ValueError:
-                    print(f"CSV conversion error: {row}")
+                except (ValueError, KeyError) as e:
+                    print(f"CSV conversion error on row {row}: {e}")
+
     except FileNotFoundError:
-        print(f"CSV file {filename} not found")
-    return products
+        return [], f"CSV file '{filename}' not found"
+    except Exception as e:
+        return [], f"CSV read error: {e}"
+
+    return products, None
 
 
-def fetch_products_from_db():
+# -----------------------------
+# Database Reader
+# -----------------------------
+def fetch_products_from_db():  # sourcery skip: extract-method
     """
-    Reads products from a SQLite database and returns a list of dictionaries
+    Reads products from the SQLite database.
+    Returns (products, error_message).
     """
-    products = []
+    conn = None
     try:
         conn = sqlite3.connect('products.db')
-        conn.row_factory = sqlite3.Row  # Access columns by name
+        conn.row_factory = sqlite3.Row
         cursor = conn.cursor()
+
         cursor.execute("SELECT id, name, category, price FROM Products")
         rows = cursor.fetchall()
+
         products = [dict(row) for row in rows]
+        return products, None
+
     except sqlite3.Error as e:
-        print(f"Database error: {e}")
+        return [], f"Database error: {e}"
+
     finally:
-        if 'conn' in locals():
+        if conn:
             conn.close()
-    return products
 
 
-# --- Routes ---
+# -----------------------------
+# Routes
+# -----------------------------
 @app.route('/')
 def home():
     return render_template('index.html')
@@ -83,41 +136,59 @@ def items():
             items_list = data.get("items", [])
     except (FileNotFoundError, json.JSONDecodeError):
         items_list = []
+
     return render_template('items.html', items=items_list)
 
 
 @app.route('/products')
 def products():
     """
-    Displays products from JSON, CSV, or SQL, with optional filtering by ID
+    Displays products from JSON, CSV, or SQL, with optional filtering by ID.
+    Usage:
+        /products?source=json
+        /products?source=csv
+        /products?source=sql
+        /products?source=json&id=1
     """
-    source = request.args.get('source', 'json').lower()
-    product_id = request.args.get('id')
+    source = request.args.get('source', type=str)
+    product_id = request.args.get('id', type=int)
 
-    # Read data based on the source
+    data = []
+    error = None
+
+    # Select data source
     if source == 'json':
         data = json_products
-    elif source == 'csv':
-        data = fetch_products_from_csv()
-    elif source == 'sql':
-        data = fetch_products_from_db()
-    else:
-        return render_template('product_display.html', error="Wrong source", products=[])
 
-    # Filter by ID if provided
-    if product_id:
-        try:
-            product_id = int(product_id)
-            filtered = [p for p in data if p['id'] == product_id]
-            if not filtered:
-                return render_template('product_display.html', error="Product not found", products=[])
-            data = filtered
-        except ValueError:
-            return render_template('product_display.html', error="Invalid ID format", products=[])
+    elif source == 'csv':
+        data, error = fetch_products_from_csv()
+
+    elif source == 'sql':
+        data, error = fetch_products_from_db()
+
+    else:
+        error = "Wrong source"
+
+    if error:
+        return render_template('product_display.html', error=error, products=[])
+
+    # Filter by ID
+    if product_id is not None:
+        filtered = [p for p in data if p['id'] == product_id]
+        if not filtered:
+            return render_template(
+                'product_display.html',
+                error=f"Product with id={product_id} not found",
+                products=[]
+            )
+        data = filtered
 
     return render_template('product_display.html', products=data)
 
 
-# --- Run the application ---
+# -----------------------------
+# Application entry point
+# -----------------------------
 if __name__ == '__main__':
+    create_database()
     app.run(debug=True, port=5000)
