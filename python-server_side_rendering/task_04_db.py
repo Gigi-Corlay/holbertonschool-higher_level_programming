@@ -101,9 +101,12 @@ def products():
             products=[]
         )
 
-    # Use fallback if reading failed
+    # --- Handle errors ---
     if error:
-        data = json_products
+        return render_template(
+            'product_display.html',
+            error=error, products=[]
+        )
 
     # --- Optional filtering by ID ---
     if product_id_str:
