@@ -1,13 +1,13 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Products</title>
+    <title>Product Display</title>
     <style>
-        table { border-collapse: collapse; width: 70%; }
+        table { width: 50%; border-collapse: collapse; margin-top: 20px; }
         th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
-        th { background-color: #f2f2f2; }
-        p.error { color: red; }
+        th { background-color: #f2 f2 f2; }
+        .error { color: red; font-weight: bold; }
     </style>
 </head>
 <body>
@@ -15,28 +15,25 @@
 
     {% if error %}
         <p class="error">{{ error }}</p>
-    {% endif %}
-
-    {% if products %}
-        <table>
-            <tr>
-                <th>ID</th>
-                <th>Name</th>
-                <th>Category</th>
-                <th>Price ($)</th>
-            </tr>
-            {% for product in products %}
-            <tr>
-                <td>{{ product.id }}</td>
-                <td>{{ product.name }}</td>
-                <td>{{ product.category }}</td>
-                <td>{{ "%.2f"|format(product.price) }}</td>
-            </tr>
-            {% endfor %}
-        </table>
     {% else %}
-        <p>No products available.</p>
+        <table>
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Category</th>
+                    <th>Price</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for product in products %}
+                <tr>
+                    <td>{{ product.name }}</td>
+                    <td>{{ product.category }}</td>
+                    <td>${{ product.price }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
     {% endif %}
-
 </body>
 </html>
