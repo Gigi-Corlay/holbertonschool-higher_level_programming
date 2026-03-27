@@ -1,6 +1,6 @@
 #!/usr/bin/node
 // Select the toggle element
-const redHeader = document.getElementById('toggle_header');
+const toggleDiv = document.getElementById('toggle_header');
 // Add a click event listener
 toggleDiv.addEventListener('click', function() {
     // Select the header element
