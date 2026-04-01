@@ -83,7 +83,7 @@ An **alias** occurs when multiple variables refer to the same object.
 
 ```python
 a = [1, 2]
-b = a  # alias
+b = a
 ```
 
 ---
