@@ -178,7 +178,7 @@ def modify_number(x):
 n = 5
 modify_number(n)
 
-print(n)  # still 5
+print(n)
 ```
 
 ## 👉 A new object is created instead of modifying the original.
